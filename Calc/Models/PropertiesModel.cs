@@ -9,5 +9,13 @@ namespace Calc.Models
     class PropertiesModel
     {
         public static bool IsShiftOn { get; set; }
+        public static string MathExpression { get; set; }
+        public static string Number { get; set; }
+        public static bool IsCleared { get; set; }
+
+        static PropertiesModel()
+        {
+            Number = ""; 
+        }
     }
 }
