@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Border BorderBrush="Black" BorderThickness="2" Margin="10,10,10,0">
             <StackPanel>
-                <Label x:Name="LbCalculatorDisplayUp" Content="0" FontSize="13" FontWeight="Bold" Grid.Row="0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Label x:Name="LbCalculatorDisplayUp" Content="" FontSize="13" FontWeight="Bold" Grid.Row="0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <Label x:Name="LbCalculatorDisplayDown" Content="0" FontSize="16" FontWeight="Bold" Grid.Row="0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             </StackPanel>
         </Border>
@@ -63,13 +63,13 @@
             <Button x:Name="Eight" Content="8"  Grid.Column="2" Grid.Row="4" Click="Button_Click_Add_Number_Or_Coma"/>
             <Button x:Name="Nine" Content="9"  Grid.Column="3" Grid.Row="4" Click="Button_Click_Add_Number_Or_Coma"/>
             <Button x:Name="Adding" Content="+"  Grid.Column="4" Grid.Row="6" Click="Button_Click_Special_Sign"/>
-            <Button x:Name="Substraction" Content="-"  Grid.Column="4" Grid.Row="5" Click="Button_Click_Add_Symbol"/>
-            <Button x:Name="Multiplication" Content="*"  Grid.Column="4" Grid.Row="4" Click="Button_Click_Add_Symbol"/>
-            <Button x:Name="Divistion" Content=":"  Grid.Column="4" Grid.Row="3" Click="Button_Click_Add_Symbol"/>
+            <Button x:Name="Substraction" Content="-"  Grid.Column="4" Grid.Row="5" Click="Button_Click_Special_Sign"/>
+            <Button x:Name="Multiplication" Content="*"  Grid.Column="4" Grid.Row="4" Click="Button_Click_Special_Sign"/>
+            <Button x:Name="Divistion" Content=":"  Grid.Column="4" Grid.Row="3" Click="Button_Click_Special_Sign"/>
             <Button x:Name="EqualSign" Content="="  Grid.Column="4" Grid.Row="7" Click="EqualSign_Click" />
             <Button x:Name="Comma" Content=","  Grid.Column="3" Grid.Row="7" Click="Button_Click_Add_Number_Or_Coma"/>
-            <Button x:Name="LeftBracket" Content="("  Grid.Column="0" Grid.Row="7" Click="Button_Click_Add_Symbol"/>
-            <Button x:Name="RigthBracket" Content=")"  Grid.Column="1" Grid.Row="7" Click="Button_Click_Add_Symbol"/>
+            <Button x:Name="LeftBracket" Content="("  Grid.Column="0" Grid.Row="7" />
+            <Button x:Name="RigthBracket" Content=")"  Grid.Column="1" Grid.Row="7" />
             <Button x:Name="SignChange" Content="±"  Grid.Column="0" Grid.Row="6" Click="SignChange_Click" />
             <Button x:Name="Factorial" Content="n!"  Grid.Column="0" Grid.Row="5" Click="Factorial_Click" />
             <Button x:Name="Pi" Content="π"  Grid.Column="0" Grid.Row="4" Click="Pi_Click"/>
@@ -87,8 +87,8 @@
             <Button x:Name="TenPowX" Content="10^x" Grid.Column="1" Grid.Row="2" Click="TenPowX_Click"/>
             <Button x:Name="Log" Content="Log" Grid.Column="2" Grid.Row="2" Click="Log_Click"/>
             <Button x:Name="Exp" Content="Exp" Grid.Column="3" Grid.Row="2" Click="Exp_Click"/>
-            <Button x:Name="Mod" Content="Mod" Grid.Column="4" Grid.Row="2"/>
-            <Button x:Name="XPowY" Content="x^y" Grid.Column="1" Grid.Row="1"/>
+            <Button x:Name="Mod" Content="Mod" Grid.Column="4" Grid.Row="2" Click="Button_Click_Special_Sign"/>
+            <Button x:Name="XPow3" Content="x^3" Grid.Column="1" Grid.Row="1" Click="XPow3_Click"/>
             <Button x:Name="Sin" Content="Sin" Grid.Column="2" Grid.Row="1" Click="Sin_Click"/>
             <Button x:Name="Cos" Content="Cos" Grid.Column="3" Grid.Row="1" Click="Cos_Click"/>
             <Button x:Name="Tan" Content="Tan" Grid.Column="4" Grid.Row="1" Click="Tan_Click"/>

@@ -13,7 +13,7 @@ namespace Calc
         public static bool IsSpecialSymbol(string symbol)
         {
             char charSymbol = (symbol.ToCharArray())[0];
-            if (charSymbol == '+' || charSymbol == '-' || charSymbol == '*' || charSymbol == '/' || charSymbol == '(' || charSymbol == ')' || charSymbol == '^' || charSymbol == '%')
+            if (charSymbol == '+' || charSymbol == '-' || charSymbol == '*' || charSymbol == '/' || charSymbol == '(' || charSymbol == ')' || charSymbol == '%')
             {
                 return true;
             }
@@ -95,6 +95,16 @@ namespace Calc
             else
             {
                 expression = expression.Remove(0, 1);
+            }
+            return expression;
+        }
+        
+        public static string IsLastSymbolIsSpecial(string expression)
+        {
+            char temp = expression[expression.Length-1];
+            if (temp == '+' || temp == '-' || temp == '*' || temp == '/' || temp == '%' )
+            {
+                return expression.Remove(expression.Length - 1, 1);
             }
             return expression;
         }

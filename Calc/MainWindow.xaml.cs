@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+//12+12+12^2=38?
+//Why?
+
 namespace Calc
 {
     /// <summary>
@@ -29,23 +32,31 @@ namespace Calc
 
         private void Button_Click_Add_Number_Or_Coma(object sender, RoutedEventArgs e)
         {
-            if (PropertiesModel.IsCleared)
-            {
-                LbCalculatorDisplayDown.Content = "";
-                PropertiesModel.IsCleared = false;
+            if (!(PropertiesModel.IsCleared && (string)(sender as Button).Content == "0"))
+                {
+                    if (PropertiesModel.IsCleared)
+                {
+                    LbCalculatorDisplayDown.Content = "";
+                    PropertiesModel.IsCleared = false;
+                }
+                if (!((string)(sender as Button).Content == "," && RuleSet.IsComaInExpression((string)LbCalculatorDisplayDown.Content)))
+                {
+               
+                        LbCalculatorDisplayDown.Content = String.Concat((string)LbCalculatorDisplayDown.Content, (string)(sender as Button).Content);
+                
+                }
+                LbCalculatorDisplayDown.Content = RuleSet.DoubleVerificationComaOnFirstPlace((string)LbCalculatorDisplayDown.Content);
             }
-            if (!((string)(sender as Button).Content == "," && RuleSet.IsComaInExpression((string)LbCalculatorDisplayDown.Content)))
-            {
-                LbCalculatorDisplayDown.Content = String.Concat((string)LbCalculatorDisplayDown.Content, (string)(sender as Button).Content);
-            }
-            LbCalculatorDisplayDown.Content = RuleSet.DoubleVerificationComaOnFirstPlace((string)LbCalculatorDisplayDown.Content);
         }
 
         private void EqualSign_Click(object sender, RoutedEventArgs e)
         {
+            LbCalculatorDisplayUp.Content += (string)LbCalculatorDisplayDown.Content;
             try
             {
-                LbCalculatorDisplayDown.Content = (new NCalc.Expression((string)LbCalculatorDisplayDown.Content).Evaluate()).ToString();
+                LbCalculatorDisplayDown.Content = (new NCalc.Expression((string)LbCalculatorDisplayUp.Content).Evaluate()).ToString();
+                LbCalculatorDisplayUp.Content = "";
+                
             }
             catch (Exception)
             {
@@ -70,17 +81,55 @@ namespace Calc
 
         private void Button_Click_Special_Sign(object sender, RoutedEventArgs e)
         {
-
+            PropertiesModel.Number = (string)LbCalculatorDisplayDown.Content;
+            PropertiesModel.Number = RuleSet.IsLastSymbolIsSpecial(PropertiesModel.Number);
+            string tempExpression = "";
+            Dictionary<string, int> sign = new Dictionary<string, int>();
+            sign.Add("+",1);
+            sign.Add("-", 2);
+            sign.Add("*", 3);
+            sign.Add(":", 4);
+            sign.Add("Mod", 5);
+            sign.Add("x^y", 6);
+            int switchCase = 0;
+            foreach (var item in sign)
+            {
+                if (item.Key==((string)(sender as Button).Content))
+                {
+                    switchCase = item.Value;
+                }
+            }
+            switch (switchCase)
+            {
+                case 1:
+                    tempExpression = PropertiesModel.Number + "+";
+                    break;
+                case 2:
+                    tempExpression = PropertiesModel.Number + "-";
+                    break;
+                case 3:
+                    tempExpression = PropertiesModel.Number + "*";
+                    break;
+                case 4:
+                    tempExpression = PropertiesModel.Number + "/";
+                    break;
+                case 5:
+                    tempExpression = PropertiesModel.Number + "%";
+                    break;
+                case 6:
+                    tempExpression = PropertiesModel.Number + "^";
+                    break;
+                default:
+                    break;
+            }
+            LbCalculatorDisplayUp.Content += tempExpression;
+            LbCalculatorDisplayDown.Content = "0";
+            PropertiesModel.IsCleared = true;
         }
 
         private void Pi_Click(object sender, RoutedEventArgs e)
         {
             LbCalculatorDisplayDown.Content = "3,14159265359";
-        }
-
-        private void Button_Click_Add_Symbol(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         private void Log_Click(object sender, RoutedEventArgs e)
@@ -151,6 +200,11 @@ namespace Calc
         private void SignChange_Click(object sender, RoutedEventArgs e)
         {
             LbCalculatorDisplayDown.Content = RuleSet.NegateNumber((string)LbCalculatorDisplayDown.Content);
+        }
+
+        private void XPow3_Click(object sender, RoutedEventArgs e)
+        {
+            LbCalculatorDisplayDown.Content = Math.Pow(Double.Parse((string)LbCalculatorDisplayDown.Content),3).ToString();
         }
     }
 }
